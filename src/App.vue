@@ -1,19 +1,15 @@
 <template>
   <div id="app">
-    <h3>Memento mori</h3>
-    <div class="monthes">
       <div 
         v-for="month in monthes"
         :key="month"
         :class="['month', {['year']: month%120==0}]" >
       {{ month }}
       </div>
-    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'App',
   computed: {
@@ -33,29 +29,19 @@ $page_padding: 20px;
 $square_size: 25px;
 $font_size: 10px;
 $square_margin: 4px;
-$number_of_square_on_a_row: 36; // 2 ans
+$number_of_square_on_a_row: 36; // 3 ans
 $app_width: $number_of_square_on_a_row * ($square_size + 2 * $square_margin);
-
 body {
   display: flex;
   justify-content: center;
   margin: 0;
   padding: $page_padding;
-
 }
 #app {
   display: flex;
-  flex-flow: column;
+  flex-flow: row wrap;
   width: $app_width;
   padding: 0;
-  > h3 {
-    margin-bottom: 10px;
-    text-align: center;
-  }
-}
-.monthes {
-  display: flex;
-  flex-flow: row wrap;
 }
 .month{
   display: flex;
@@ -70,8 +56,6 @@ body {
   border: 1px solid black;
 }
 .year {
-  // background-color: blue;
-  // background-color: black;
   border: 2px solid black;
 }
 </style>

@@ -1,4 +1,9 @@
-# memento-mori
+# Memento mori
+
+Life calendar: monthes in a 90 years long life.
+Bigger borders mark the end of a decade.
+
+Static files are in the public/ folder.
 
 ## Project setup
 ```
@@ -14,11 +19,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
