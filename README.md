@@ -1,21 +1,8 @@
 # Memento mori
 
-Life calendar: monthes in a 90 years long life.
+Life calendar: monthes in a 90 years long life. 
 Bigger borders mark the end of a decade.
 
-Static files are in the public/ folder.
+So, **how many monthes have you lived ? What have you achieved ?**
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
+![result_image](memento_mori.png)

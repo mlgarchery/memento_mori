@@ -15,6 +15,7 @@ export default {
   computed: {
     monthes() {
       let result = [];
+      // A 90 years old life, for the optimists
       for(let i=1; i <= 90*12; i++){
         result.push(i);
       }
