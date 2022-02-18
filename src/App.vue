@@ -3,7 +3,7 @@
       <div 
         v-for="month in monthes"
         :key="month"
-        :class="['month', {['year']: month%120==0}]" >
+        :class="['month', {['year']: month%120==0}, {['completed']: month <= completed}]" >
       {{ month }}
       </div>
   </div>
@@ -20,8 +20,11 @@ export default {
         result.push(i);
       }
       return result;
-    }
-  }
+    },
+    completed(){
+      return 336;
+    }      
+  },
 }
 </script>
 
@@ -58,5 +61,8 @@ body {
 }
 .year {
   border: 2px solid black;
+}
+.completed{
+  background-color: rgb(0, 0, 0);
 }
 </style>
