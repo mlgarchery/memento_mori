@@ -1,30 +1,70 @@
 <template>
   <div id="app">
+    <div id="setup">
+      <div>
+        <h2 class="title">
+          Your life<br/>
+        </h2>
+        <input v-model="myYear" placeholder="années" /> years <br>
+        <input v-model="myMonth" placeholder="mois" /> monthes.
+        <p> You've used {{parseInt(completedMonthes/(90*12) * 100)}} % of a 90-years, <br>
+        fully creative and beautiful life. <br/>
+        You'll be remembered.</p>
+        <p>Just get to work.</p>
+        <p>And clean your room.</p>
+      </div>
+    </div>
+    <div id="life">
       <div 
         v-for="month in monthes"
         :key="month"
-        :class="['month', {['year']: month%120==0}, {['completed']: month <= completed}]" >
-      {{ month }}
+        @click="complete(month)"
+        :class="['month', {['year']: month%120==0}, {['completedMonthes']: month <= completedMonthes}]" >
+      {{parseInt(month/12)}} <br> {{month%12}}
       </div>
+    </div>
+
   </div>
 </template>
 
 <script>
 export default {
   name: 'App',
-  computed: {
-    monthes() {
-      let result = [];
-      // A 90 years old life, for the optimists
-      for(let i=1; i <= 90*12; i++){
-        result.push(i);
-      }
-      return result;
-    },
-    completed(){
-      return 336;
-    }      
+  mounted(){
+    // load your age saved in the localStorage of your browser
+    let myYear = localStorage.getItem("myYear");
+    let myMonth = localStorage.getItem("myMonth");
+    if(myYear) this.myYear = myYear;
+    if(myMonth) this.myMonth = myMonth;
   },
+  computed: {
+    completedMonthes: {
+      get(){
+        return parseInt(this.myYear)*12 + parseInt(this.myMonth);
+      },
+      set(month){
+        this.myYear = parseInt(month / 12);
+        this.myMonth = parseInt(month % 12);
+        this.setAgeInLocalStorage(this.myYear, this.myMonth);
+      }
+    }
+  },
+  data(){
+    return {
+      myYear: 27, // a default value
+      myMonth: 11, // a default value
+      monthes: Array.from(Array(90*12).keys()),
+    }
+  },
+  methods: {
+    complete(month){
+      this.completedMonthes = month;
+    },
+    setAgeInLocalStorage(year, month){
+      localStorage.setItem("myYear", year);
+      localStorage.setItem("myMonth", month);
+    }
+  }
 }
 </script>
 
@@ -33,15 +73,28 @@ $page_padding: 20px;
 $square_size: 25px;
 $font_size: 10px;
 $square_margin: 4px;
-$number_of_square_on_a_row: 36; // 3 ans
+$number_of_square_on_a_row: 42; // max number of month on a row
 $app_width: $number_of_square_on_a_row * ($square_size + 2 * $square_margin);
-body {
+
+#app{
   display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: $page_padding;
 }
-#app {
+
+#setup{
+  display: flex;
+  width: 350px;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial;
+
+  input{
+    margin: 2px;
+    width: 50px;
+    border: 1px solid black;
+  }
+}
+
+#life {
   display: flex;
   flex-flow: row wrap;
   width: $app_width;
@@ -59,10 +112,12 @@ body {
   box-sizing: border-box;
   border: 1px solid black;
 }
+
 .year {
   border: 2px solid black;
 }
-.completed{
+
+.completedMonthes{
   background-color: rgb(0, 0, 0);
 }
 </style>
